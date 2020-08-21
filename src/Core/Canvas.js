@@ -54,6 +54,7 @@ export class Canvas {
         this.ctx.fillText(`Top Score: ` + skier.topScore, 10, 50);
         this.ctx.fillText(`Distance: ` + skier.activeY, 10, 80);
         this.ctx.fillText(`Speed: ` + skier.speed, 10, 110);
+        this.ctx.fillText(`Press space to pause/resume `, 10, 140);
         this.ctx.stroke();
     }
 
