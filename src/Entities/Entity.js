@@ -21,10 +21,12 @@ export class Entity {
     }
 
     draw(canvas, assetManager) {
-        const asset = assetManager.getAsset(this.assetName);
-        const drawX = this.x - asset.width / 2;
-        const drawY = this.y - asset.height / 2;
+        if (this.assetName) {
+            const asset = assetManager.getAsset(this.assetName);
+            const drawX = this.x - asset.width / 2;
+            const drawY = this.y - asset.height / 2;
 
-        canvas.drawImage(asset, drawX, drawY, asset.width, asset.height);
+            canvas.drawImage(asset, drawX, drawY, asset.width, asset.height);
+        }
     }
 }

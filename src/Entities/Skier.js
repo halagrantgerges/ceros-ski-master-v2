@@ -19,10 +19,11 @@ export class Skier extends Entity {
 
     updateAsset() {
         this.assetName = Constants.SKIER_DIRECTION_ASSET[this.direction];
+
     }
 
     move() {
-        switch(this.direction) {
+        switch (this.direction) {
             case Constants.SKIER_DIRECTIONS.LEFT_DOWN:
                 this.moveSkierLeftDown();
                 break;
@@ -31,6 +32,15 @@ export class Skier extends Entity {
                 break;
             case Constants.SKIER_DIRECTIONS.RIGHT_DOWN:
                 this.moveSkierRightDown();
+                break;
+            case Constants.SKIER_DIRECTIONS.LEFT:
+                this.moveSkierLeft();
+                break;
+            case Constants.SKIER_DIRECTIONS.RIGHT:
+                this.moveSkierRight();
+                break;
+            case Constants.SKIER_DIRECTIONS.UP:
+                this.moveSkierUp();
                 break;
         }
     }
@@ -58,35 +68,88 @@ export class Skier extends Entity {
     }
 
     moveSkierUp() {
-        this.y -= Constants.SKIER_STARTING_SPEED;
+        this.y += this.speed;
     }
 
     turnLeft() {
-        if(this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
+
+        /**
+         * this code caused the bug, because  this.direction=0
+         * and Constants.SKIER_DIRECTIONS.LEFT=1
+         * so it goes into else which will be evaluated as 
+         * this.setDirection(- 1);  -> undefined move
+         * and the program will crash 
+         */
+        if (this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
         }
         else {
-            this.setDirection(this.direction - 1);
+            this.setDirection(Constants.SKIER_DIRECTIONS.LEFT);
+            // this.setDirection(this.direction - 1);
         }
     }
 
     turnRight() {
-        if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
+        /** fixing another bug here, 
+         * Steps to Reproduce:  
+            Load the game
+            Crash into an obstacle
+            Press click on righ arrow
+         *  expected: The skier gets up and is facing to the right
+         *  actual: the skier is still shown as crashed, to doesn't move to the right
+         */
+
+        if (this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
         }
         else {
-            this.setDirection(this.direction + 1);
+            // this.setDirection(this.direction + 1);
+            this.setDirection(Constants.SKIER_DIRECTIONS.RIGHT);
+
         }
+
+
     }
 
     turnUp() {
-        if(this.direction === Constants.SKIER_DIRECTIONS.LEFT || this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
+
+        if (this.direction === Constants.SKIER_DIRECTIONS.LEFT
+            || this.direction === Constants.SKIER_DIRECTIONS.RIGHT
+        ) {
             this.moveSkierUp();
+            this.setDirection(Constants.SKIER_DIRECTIONS.UP);
+
         }
+
+        else {
+            this.direction = Constants.SKIER_DIRECTIONS.UP;
+
+        }
+
     }
 
     turnDown() {
         this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+    }
+
+    //check if the skier has hit rock 1 or rock 2 or obstacle is jump rump
+    // and the user clicked on up botton
+    checkSkierShouldJumpOverRocks(obstacleName) {
+
+        let skierJumpChecker = false;
+        if (this.direction === Constants.SKIER_DIRECTIONS.UP
+            && (obstacleName === Constants.ROCK1
+                || obstacleName === Constants.ROCK2
+                || obstacleName === Constants.JUMP_RAMP))
+            skierJumpChecker = true;
+
+        // successful jump
+        // made this step because the skier is in crash mode
+        // so I've lefted it up
+        if (obstacleName === Constants.JUMP_RAMP && skierJumpChecker) {
+            this.turnUp();
+        }
+        return skierJumpChecker;
     }
 
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
@@ -107,11 +170,16 @@ export class Skier extends Entity {
                 obstaclePosition.x + obstacleAsset.width / 2,
                 obstaclePosition.y
             );
+            const checkintersectTwoRects = intersectTwoRects(skierBounds, obstacleBounds);
 
-            return intersectTwoRects(skierBounds, obstacleBounds);
+
+            if (checkintersectTwoRects && this.checkSkierShouldJumpOverRocks(obstacle.getAssetName())) return false;
+
+            return checkintersectTwoRects
+
         });
 
-        if(collision) {
+        if (collision) {
             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
         }
     };

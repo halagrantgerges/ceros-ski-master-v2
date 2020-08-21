@@ -5,6 +5,7 @@ require("@babel/register");
 // Webpack Configuration
 const config = {
 
+    devtool: "source-map",
     entry: ['babel-polyfill', './src/index.js'],
 
     output: {
@@ -13,7 +14,7 @@ const config = {
     },
 
     module: {
-        rules : [
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
