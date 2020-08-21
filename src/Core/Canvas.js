@@ -45,4 +45,16 @@ export class Canvas {
 
         this.ctx.drawImage(image, x, y, width, height);
     }
+
+    drawInfo(skier) {
+
+        this.ctx.fillStyle = "black";
+        this.ctx.beginPath();
+        this.ctx.font = "20px Arial";
+        this.ctx.fillText(`Top Score: ` + skier.topScore, 10, 50);
+        this.ctx.fillText(`Distance: ` + skier.activeY, 10, 80);
+        this.ctx.fillText(`Speed: ` + skier.speed, 10, 110);
+        this.ctx.stroke();
+    }
+
 }

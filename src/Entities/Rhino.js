@@ -2,7 +2,6 @@ import * as Constants from "../Constants";
 import { Entity } from "./Entity";
 import { intersectTwoRects, Rect } from "../Core/Utils";
 
-const CHASING_DISTANCE = 500;
 
 export class Rhino extends Entity {
 	assetName = Constants.RHINO_RUN_LEFT;
@@ -14,15 +13,15 @@ export class Rhino extends Entity {
 
 	// draw rhino
 	drawRhino(canvas, assetManager) {
-		if (this.y >= CHASING_DISTANCE) {
-			this.draw(canvas, assetManager);
+		if (this.y >= Constants.CHASING_DISTANCE) {
+			this.draw(canvas, assetManager, null);
 		}
 	}
 
 
 	// start chasing the skier if the chasing distance is met
 	move(skier, assetManager) {
-		if (skier.y >= CHASING_DISTANCE &&
+		if (skier.y >= Constants.CHASING_DISTANCE &&
 			this.direction === Constants.RHINO_DIRECTIONS.RUN_LEFT) {
 			this.y = skier.y;
 			this.initChaseSkier(skier, assetManager);
@@ -63,6 +62,7 @@ export class Rhino extends Entity {
 	}
 
 	CheckForCollision(assetManager, skier) {
+
 		// get directions for rhino and skier
 		const asset = assetManager.getAsset(this.assetName);
 		const RhinoBounds = new Rect(
@@ -95,11 +95,11 @@ export class Rhino extends Entity {
 	}
 
 	moveRhinoUp(skierX) {
-		this.x = skierX - CHASING_DISTANCE * 2;
+		this.x = skierX - Constants.CHASING_DISTANCE * 2;
 	}
 
 	moveRhinoDown(skierY) {
-		this.x = skierY - CHASING_DISTANCE * 2;
+		this.x = skierY - Constants.CHASING_DISTANCE * 2;
 	}
 
 
@@ -131,7 +131,7 @@ export class Rhino extends Entity {
 			this.setDirection(rhinoDirection);
 		}, 500);
 	}
-  
+
 
 
 	// set skier assetName to "SKIER_DEAD"

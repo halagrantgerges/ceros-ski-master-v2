@@ -10,6 +10,9 @@ export class Skier extends Entity {
 
     constructor(x, y) {
         super(x, y);
+        this.activeY = y;
+        this.topScore = y;
+
     }
 
     setDirection(direction) {
@@ -23,6 +26,13 @@ export class Skier extends Entity {
     }
 
     move() {
+
+        if (this.y != 0 && this.y % 100 == 0) {
+            this.speed++;
+        }
+        if (this.topScore < this.activeY)
+            this.topScore = this.activeY;
+
         switch (this.direction) {
             case Constants.SKIER_DIRECTIONS.LEFT_DOWN:
                 this.moveSkierLeftDown();
@@ -46,29 +56,33 @@ export class Skier extends Entity {
     }
 
     moveSkierLeft() {
-        this.x -= Constants.SKIER_STARTING_SPEED;
+        this.x -= this.speed;
     }
 
     moveSkierLeftDown() {
         this.x -= this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
         this.y += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
+        this.activeY += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
     }
 
     moveSkierDown() {
         this.y += this.speed;
+        this.activeY += this.speed;
     }
 
     moveSkierRightDown() {
         this.x += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
         this.y += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
+        this.activeY += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
     }
 
     moveSkierRight() {
-        this.x += Constants.SKIER_STARTING_SPEED;
+        this.x += this.speed;
     }
 
     moveSkierUp() {
         this.y += this.speed;
+        this.activeY += this.speed;
     }
 
     turnLeft() {
@@ -181,6 +195,10 @@ export class Skier extends Entity {
 
         if (collision) {
             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+            // reseet speed after crash to the init speed
+            this.speed = Constants.SKIER_STARTING_SPEED;
+            this.activeY = 0;
+
         }
     };
 }

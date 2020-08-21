@@ -8,8 +8,10 @@ import { Rhino } from '../Entities/Rhino';
 
 export class Game {
     gameWindow = null;
-
+    gamePaused;
     constructor() {
+
+        this.gamePaused = false;
         this.assetManager = new AssetManager();
         this.canvas = new Canvas(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
         this.skier = new Skier(0, 0);
@@ -37,24 +39,25 @@ export class Game {
     }
 
     updateGameWindow() {
-        this.skier.move();
 
-        const previousGameWindow = this.gameWindow;
-        this.calculateGameWindow();
+        if (!this.gamePaused) {
+            this.skier.move();
 
-        this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
-        this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
+            const previousGameWindow = this.gameWindow;
+            this.calculateGameWindow();
+
+            this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
+            this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
 
 
-        this.rhino.move(this.skier, this.assetManager);
+            this.rhino.move(this.skier, this.assetManager);
+        }
     }
 
     drawGameWindow() {
         this.canvas.setDrawOffset(this.gameWindow.left, this.gameWindow.top);
-
-        this.skier.draw(this.canvas, this.assetManager);
+        this.skier.draw(this.canvas, this.assetManager, this.skier);
         this.obstacleManager.drawObstacles(this.canvas, this.assetManager);
-        //check
         this.rhino.drawRhino(this.canvas, this.assetManager);
     }
 
@@ -67,23 +70,30 @@ export class Game {
     }
 
     handleKeyDown(event) {
-        switch (event.which) {
-            case Constants.KEYS.LEFT:
-                this.skier.turnLeft();
-                event.preventDefault();
-                break;
-            case Constants.KEYS.RIGHT:
-                this.skier.turnRight();
-                event.preventDefault();
-                break;
-            case Constants.KEYS.UP:
-                this.skier.turnUp();
-                event.preventDefault();
-                break;
-            case Constants.KEYS.DOWN:
-                this.skier.turnDown();
-                event.preventDefault();
-                break;
+
+        if (!this.gamePaused || event.which == Constants.KEYS.SPACE) {
+            switch (event.which) {
+                case Constants.KEYS.SPACE:
+                    this.gamePaused = !this.gamePaused;
+                    event.preventDefault();
+                    break;
+                case Constants.KEYS.LEFT:
+                    this.skier.turnLeft();
+                    event.preventDefault();
+                    break;
+                case Constants.KEYS.RIGHT:
+                    this.skier.turnRight();
+                    event.preventDefault();
+                    break;
+                case Constants.KEYS.UP:
+                    this.skier.turnUp();
+                    event.preventDefault();
+                    break;
+                case Constants.KEYS.DOWN:
+                    this.skier.turnDown();
+                    event.preventDefault();
+                    break;
+            }
         }
     }
 }

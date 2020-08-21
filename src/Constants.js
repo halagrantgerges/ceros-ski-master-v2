@@ -26,6 +26,10 @@ export const SKIER_DIED = 'SkierDied';
 export const SKIER_STARTING_SPEED = 8;
 export const SKIER_DIAGONAL_SPEED_REDUCER = 1.4142;
 
+// adding initial space between skier and rhino
+export const CHASING_DISTANCE = 8000;
+
+
 export const ASSETS = {
     [SKIER_CRASH]: 'img/skier_crash.png',
     [SKIER_LEFT]: 'img/skier_left.png',
@@ -77,7 +81,8 @@ export const KEYS = {
     LEFT: 37,
     RIGHT: 39,
     UP: 38,
-    DOWN: 40
+    DOWN: 40,
+    SPACE: 32
 };
 
 
