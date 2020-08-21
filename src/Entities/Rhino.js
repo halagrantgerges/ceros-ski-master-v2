@@ -2,7 +2,7 @@ import * as Constants from "../Constants";
 import { Entity } from "./Entity";
 import { intersectTwoRects, Rect } from "../Core/Utils";
 
-const CHASING_DISTANCE = 8000;
+const CHASING_DISTANCE = 500;
 
 export class Rhino extends Entity {
 	assetName = Constants.RHINO_RUN_LEFT;
@@ -54,6 +54,7 @@ export class Rhino extends Entity {
 		if (this.direction === Constants.RHINO_DIRECTIONS.RUN_LEFT
 			&& this.CheckForCollision(assetManager, skier)) {
 			// if rhino met the skier, kill the skier
+			// remove the skier from the scene, or else it will keep on running
 			this.killSkier(skier);
 			//  move it to the next step (LIFT_SKIER)
 			this.setDirection(Constants.RHINO_DIRECTIONS.LIFT_SKIER);
@@ -85,7 +86,6 @@ export class Rhino extends Entity {
 
 	}
 
-
 	moveRhinoLeft(skier_speed) {
 		this.x += skier_speed;
 	}
@@ -102,26 +102,9 @@ export class Rhino extends Entity {
 		this.x = skierY - CHASING_DISTANCE * 2;
 	}
 
-	// set skier assetName to "SKIER_DEAD"
-	killSkier(skier) {
-		skier.direction = Constants.SKIER_DIRECTIONS.DIED;
-		skier.y = this.y;
-		skier.x = this.x;
-		skier.assetName = Constants.SKIER_DIED;
-	}
-
-	setDirection(direction) {
-		this.direction = direction;
-		this.updateAsset();
-	}
-
-	updateAsset() {
-		this.assetName = Constants.RHINO_DIRECTION_ASSET[this.direction];
-	}
 
 	updateDirection(skier) {
 		if (this.direction) {
-			this.killSkier(skier);
 			switch (this.direction) {
 				case Constants.RHINO_DIRECTIONS.LIFT_SKIER:
 					this.drawKillSkierScene(Constants.RHINO_DIRECTIONS.LIFT_MOUTH_OPEN_SKIER);
@@ -142,10 +125,30 @@ export class Rhino extends Entity {
 		}
 
 	}
-
+	// draw the kill of the skier
 	drawKillSkierScene(rhinoDirection) {
-		var localRhinoObject = this;
-		// draw the kill of the skier
-		setTimeout(function () { localRhinoObject.setDirection(rhinoDirection); }, 500);
+		setTimeout(() => {
+			this.setDirection(rhinoDirection);
+		}, 500);
 	}
+  
+
+
+	// set skier assetName to "SKIER_DEAD"
+	killSkier(skier) {
+		skier.direction = Constants.SKIER_DIRECTIONS.DIED;
+		skier.y = this.y;
+		skier.x = this.x;
+		skier.assetName = Constants.SKIER_DIED;
+	}
+
+	setDirection(direction) {
+		this.direction = direction;
+		this.updateAsset();
+	}
+
+	updateAsset() {
+		this.assetName = Constants.RHINO_DIRECTION_ASSET[this.direction];
+	}
+
 }
