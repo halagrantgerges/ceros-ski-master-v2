@@ -29,7 +29,7 @@ unclear, don't hesitate to reach out.
     1. Press the left arrow key
   * Expected Result: The skier gets up and is facing to the left
   * Actual Result: Giant blizzard occurs causing the screen to turn completely white (or maybe the game just crashes!)
-
+```
 
   * bug fixed also I found another bug.
    * Steps to Reproduce:  
@@ -38,8 +38,8 @@ unclear, don't hesitate to reach out.
             Press click on righ arrow
          *  expected: The skier gets up and is facing to the right
          *  actual: the skier is still shown as crashed, to doesn't move to the right
-     
-  
+    
+  ```
 * **Write unit tests:**
 
   The base code has Jest, a unit testing framework, installed. Write some unit tests to ensure that the above mentioned
@@ -74,7 +74,7 @@ unclear, don't hesitate to reach out.
     (done)
   * If the rhino catches the skier, it's game over and the rhino should eat the skier. 
 
-    (done)
+    (done, rhino chases you after distance =800)
 
 
 * **Documentation:**
