@@ -53,13 +53,19 @@ unclear, don't hesitate to reach out.
   jump. The asset file for jumps is already included. All you gotta do is make the guy jump. We even included some jump 
   trick assets if you wanted to get really fancy!
   * Have the skier jump by either pressing a key or use the ramp asset to have the skier jump whenever he hits a ramp.  
-
+```
     (done)
+```    
   * The skier should be able to jump over some obstacles while in the air. 
     * Rocks can be jumped over 
+  ```
     (done)
-    * Trees can NOT be jumped over
+``` 
+* Trees can NOT be jumped over
+ ```
     (done)
+```
+
   * Anything else you'd like to add to the skier's jumping ability, go for it!
    
 * **Build something new:**
@@ -70,8 +76,9 @@ unclear, don't hesitate to reach out.
   * The Rhino should appear after a set amount of time or distance skied and chase the skier, using the running assets
     we've provided to animate the rhino.
 
-
+```
     (done)
+```
   * If the rhino catches the skier, it's game over and the rhino should eat the skier. 
 
     (done, rhino chases you after distance =800)
@@ -82,13 +89,14 @@ unclear, don't hesitate to reach out.
   * Update this README file with your comments about your work; what was done, what wasn't, features added & known bugs.
 
 
+ ```
     (done)
-
+```
 
   * Provide a way for us to view the completed code and run it, either locally or through a cloud provider
-  
-
+  ```
     (done)
+```
 
 * **Be original:**  
   * This should go without saying but don’t copy someone else’s game implementation!
@@ -114,25 +122,29 @@ If you're having fun with this, feel free to add more to it. Here's some ideas o
 how creative candidates get with this.
  
 * Provide a way to reset the game once it's over  
-    (done)  -> after the game is over press arrow down key, to reset
+   ``` (done)  -> after the game is over press arrow down key, to reset
+   ```
 * Provide a way to pause and resume the game
+```
     (done)  -> press "space" any time to pause and resume game
+ ```
 
 * Add a score that increments as the skier skis further
-
+```
     (done)
+```
 
 * Increase the difficulty the longer the skier skis (increase speed, increase obstacle frequency, etc.)
 
-
+```
     (done)
-
+```
 
 * Deploy the game to a server so that we can play it without having to install it locally
 
 
 * Write more unit tests for your code
-
+```
     (done)
-
+```
 We are looking forward to see what you come up with!
