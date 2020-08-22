@@ -27,7 +27,7 @@ export class Skier extends Entity {
 
     move() {
 
-        if (this.y != 0 && this.y % 100 == 0) {
+        if (this.activeY != 0 && this.activeY % 100 == 0) {
             this.speed++;
         }
         if (this.topScore < this.activeY)
