@@ -34,7 +34,8 @@
   },
   "dependencies": {
     "css-loader": "^2.1.1",
-    "http-server": "^0.12.3",
+    "express": "^4.17.1",
+    "modernizr-webpack-plugin": "^1.0.7",
     "style-loader": "^0.23.1"
   }
 }
