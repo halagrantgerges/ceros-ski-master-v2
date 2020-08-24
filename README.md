@@ -146,6 +146,11 @@ how creative candidates get with this.
 
 * Deploy the game to a server so that we can play it without having to install it locally
 
+```
+    (done)
+```
+
+
 <h3> Fix deployed on https://ceros-ski-master-v2.herokuapp.com/</h3>
 
 * Write more unit tests for your code
