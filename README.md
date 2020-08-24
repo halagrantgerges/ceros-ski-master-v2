@@ -1,8 +1,8 @@
-# Ceros Ski Code Challenge
+# Ceros Ski Code Challenge 
 
-```
-Fix deployed on "https://ceros-ski-master-v2.herokuapp.com/"
-```
+
+<h1> Fix deployed on https://ceros-ski-master-v2.herokuapp.com/</h1>
+
 
 Welcome to the Ceros Code Challenge - Ski Edition!
 
