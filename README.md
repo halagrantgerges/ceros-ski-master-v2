@@ -1,5 +1,9 @@
 # Ceros Ski Code Challenge
 
+```
+Fix deployed on "https://ceros-ski-master-v2.herokuapp.com/"
+```
+
 Welcome to the Ceros Code Challenge - Ski Edition!
 
 For this challenge, we have included some base code for Ceros Ski, our version of the classic Windows game SkiFree. If
@@ -142,6 +146,10 @@ how creative candidates get with this.
 
 * Deploy the game to a server so that we can play it without having to install it locally
 
+```
+https://ceros-ski-master-v2.herokuapp.com/
+
+```
 
 * Write more unit tests for your code
 ```
