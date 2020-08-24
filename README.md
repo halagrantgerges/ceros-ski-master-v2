@@ -1,7 +1,7 @@
 # Ceros Ski Code Challenge 
 
 
-<h1> Fix deployed on https://ceros-ski-master-v2.herokuapp.com/</h1>
+<h3> Fix deployed on https://ceros-ski-master-v2.herokuapp.com/</h3>
 
 
 Welcome to the Ceros Code Challenge - Ski Edition!
@@ -146,10 +146,7 @@ how creative candidates get with this.
 
 * Deploy the game to a server so that we can play it without having to install it locally
 
-```
-https://ceros-ski-master-v2.herokuapp.com/
-
-```
+<h3> Fix deployed on https://ceros-ski-master-v2.herokuapp.com/</h3>
 
 * Write more unit tests for your code
 ```
