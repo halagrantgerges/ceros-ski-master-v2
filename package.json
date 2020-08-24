@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --config ./webpack.config.js",
     "test": "jest",
-    "start":"npm run dev"
+    "start": "node web.js "
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "css-loader": "^2.1.1",
+    "http-server": "^0.12.3",
     "style-loader": "^0.23.1"
   }
 }
